@@ -13,6 +13,9 @@ import img from '../../images/pexels-dziana-hasanbekava-5480827.jpg'
 import { getGenres } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from '../spinner'
+import { DatePicker } from '@mui/x-date-pickers'; 
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'; 
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'; 
 
 const formControl = 
   {
@@ -37,8 +40,10 @@ export default function FilterMoviesCard(props) {
     genres.unshift({ id: "0", name: "All" });
   }
 
+  const currentYear = new Date().getFullYear();
+  const years = Array.from({ length: 21 }, (_, i) => currentYear - i);
+
   const handleChange = (e, type, value) => {
-    e.preventDefault();
     props.onUserInput(type, value); // NEW
   };
 
@@ -50,10 +55,14 @@ export default function FilterMoviesCard(props) {
     handleChange(e, "genre", e.target.value);
   };
 
+  const handleYearChange = (e) => {
+    handleChange(e, "releaseDate", e.target.value);
+  };
+
   return (
     <Card 
       sx={{
-        backgroundColor: "rgb(204, 204, 0)"
+        backgroundColor: "rgb(128, 0, 128)"
       }} 
       variant="outlined">
       <CardContent>
@@ -88,18 +97,26 @@ export default function FilterMoviesCard(props) {
             })}
           </Select>
         </FormControl>
-      </CardContent>
-      <CardMedia
-        sx={{ height: 300 }}
-        image={img}
-        title="Filter"
-      />
-      <CardContent>
-        <Typography variant="h5" component="h1">
-          <SearchIcon fontSize="large" />
-          Filter the movies.
-          <br />
-        </Typography>
+
+        
+        <FormControl sx={{ margin: 1, minWidth: 220 }}>
+          <InputLabel id="year-label">Release Year</InputLabel>
+          <Select
+            labelId="year-label"
+            id="year-select"
+            value={props.releaseDate || ""}
+            onChange={handleYearChange}
+          >
+            <MenuItem value="">
+              <em>All Years</em>
+            </MenuItem>
+            {years.map((year) => (
+              <MenuItem key={year} value={year}>
+                {year}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
       </CardContent>
     </Card>
   );

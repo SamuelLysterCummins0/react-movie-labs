@@ -1,13 +1,16 @@
-import { useEffect, useState } from "react";
-import {getMovie} from '../api/tmdb-api'
-
-const useMovie = id => {
+const useMovie = (id) => {
   const [movie, setMovie] = useState(null);
+
   useEffect(() => {
-    getMovie(id).then(movie => {
-      setMovie(movie);
-    });
+    getMovieDetailsWithCredits(id)
+      .then((movieDetails) => {
+        setMovie(movieDetails);
+      })
+      .catch((error) => {
+        console.error("Error fetching movie details with credits:", error);
+      });
   }, [id]);
+
   return [movie, setMovie];
 };
 

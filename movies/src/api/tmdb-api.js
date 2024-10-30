@@ -28,6 +28,13 @@ export const getMovie = (args) => {
     throw error
  });
 };
+
+export const getMovieDetailsWithCredits = (id) => {
+  return fetch(
+    `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}&append_to_response=credits`
+  ).then(response => response.json());
+};
+
   
   export const getGenres = async () => {
     return fetch(
@@ -60,6 +67,18 @@ export const getMovie = (args) => {
       throw error
    });
   };
+
+  export const getMovieRecommendations = (id) => {
+    return fetch(
+      `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
+    ).then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to fetch recommendations');
+      }
+      return response.json();
+    });
+  };
+  
   
   export const getMovieImages = ({ queryKey }) => {
     const [, idPart] = queryKey;

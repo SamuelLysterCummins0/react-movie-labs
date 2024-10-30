@@ -70,6 +70,43 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
           </li>
         ))}
       </Paper>
+      {movie.credits && (
+        <>
+          {/* Cast Section */}
+          {movie.credits.cast.length > 0 && (
+            <>
+              <Typography variant="h5" component="h3" sx={{ mt: 2 }}>
+                Cast
+              </Typography>
+              <Paper component="ul" sx={{ ...root }}>
+                {movie.credits.cast.slice(0, 5).map((castMember) => (
+                  <li key={castMember.id}>
+                    <Chip label={`${castMember.name} as ${castMember.character}`} sx={{ ...chip }} />
+                  </li>
+                ))}
+              </Paper>
+            </>
+          )}
+
+          {/* Crew Section */}
+          {movie.credits.crew.length > 0 && (
+            <>
+              <Typography variant="h5" component="h3" sx={{ mt: 2 }}>
+                Crew
+              </Typography>
+              <Paper component="ul" sx={{ ...root }}>
+                {movie.credits.crew
+                  .filter((crewMember) => ["Director", "Producer", "Screenplay"].includes(crewMember.job))
+                  .map((crewMember) => (
+                    <li key={crewMember.id}>
+                      <Chip label={`${crewMember.job}: ${crewMember.name}`} sx={{ ...chip }} />
+                    </li>
+                  ))}
+              </Paper>
+            </>
+          )}
+        </>
+      )}
       <Fab
         color="secondary"
         variant="extended"

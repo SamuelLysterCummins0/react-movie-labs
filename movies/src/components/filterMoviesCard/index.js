@@ -41,7 +41,7 @@ export default function FilterMoviesCard(props) {
   }
 
   const currentYear = new Date().getFullYear();
-  const years = Array.from({ length: 21 }, (_, i) => currentYear - i);
+  const years = Array.from({ length: 100 }, (_, i) => currentYear - i);
 
   const handleChange = (e, type, value) => {
     props.onUserInput(type, value); // NEW
@@ -99,6 +99,7 @@ export default function FilterMoviesCard(props) {
         </FormControl>
 
         
+        
         <FormControl sx={{ margin: 1, minWidth: 220 }}>
           <InputLabel id="year-label">Release Year</InputLabel>
           <Select
@@ -106,6 +107,14 @@ export default function FilterMoviesCard(props) {
             id="year-select"
             value={props.releaseDate || ""}
             onChange={handleYearChange}
+            MenuProps={{
+              PaperProps: {
+                style: {
+                  maxHeight: 200, 
+                  overflowY: 'auto', 
+                },
+              },
+            }}
           >
             <MenuItem value="">
               <em>All Years</em>

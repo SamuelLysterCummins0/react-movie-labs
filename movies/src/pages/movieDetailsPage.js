@@ -4,7 +4,8 @@ import MovieDetails from "../components/movieDetails/";
 import PageTemplate from "../components/templateMoviePage";
 //import useMovie from "../hooks/useMovie";
 import { getMovie } from '../api/tmdb-api'
-import { getMovieDetailsWithCredits } from '../api/tmdb-api';
+import { getMovieDetailsWithCredits, getMovieRecommendations} from '../api/tmdb-api';
+import MovieRecommendations from '../components/recommendations/MovieRecommendations';
 import { useQuery } from "react-query";
 import Spinner from '../components/spinner'
 
@@ -15,6 +16,11 @@ const MoviePage = (props) => {
     () => getMovieDetailsWithCredits(id)
   );
 
+  const { data: recommendations } = useQuery(
+    ["recommendations", { id: id }],
+    () => getMovieRecommendations(id),
+    { enabled: !!movie } 
+  );
   
 
   if (isLoading) {
@@ -31,6 +37,10 @@ const MoviePage = (props) => {
         <>
           <PageTemplate movie={movie}>
             <MovieDetails movie={movie} />
+            {/* Display Movie Recommendations */}
+            {recommendations && recommendations.results && (
+              <MovieRecommendations recommendations={recommendations.results} />
+            )}
           </PageTemplate>
         </>
       ) : (

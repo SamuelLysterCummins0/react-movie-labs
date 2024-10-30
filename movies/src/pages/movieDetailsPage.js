@@ -15,6 +15,8 @@ const MoviePage = (props) => {
     () => getMovieDetailsWithCredits(id)
   );
 
+  
+
   if (isLoading) {
     return <Spinner />;
   }

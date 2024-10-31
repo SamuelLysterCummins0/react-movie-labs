@@ -38,6 +38,7 @@ export default function MovieCard({ movie, action }) {
           transform: 'scale(1.05)', 
           boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)', 
         },
+        background: 'linear-gradient(to top, rgba(221, 160, 221, 1), rgba(221, 160, 221, 0.5))', // Light purple background
       }}
     >
       <CardHeader

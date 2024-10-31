@@ -71,7 +71,7 @@ export default function FilterMoviesCard(props) {
           Filter the movies.
         </Typography>
         <TextField
-      sx={{...formControl}}
+      sx={{ margin: 1, minWidth: 220 }}
       id="filled-search"
       label="Search field"
       type="search"
@@ -79,7 +79,7 @@ export default function FilterMoviesCard(props) {
       value={props.titleFilter}
       onChange={handleTextChange}
     />
-        <FormControl sx={{...formControl}}>
+        <FormControl sx={{ margin: 1, minWidth: 220 }}>
           <InputLabel id="genre-label">Genre</InputLabel>
           <Select
     labelId="genre-label"
@@ -98,8 +98,6 @@ export default function FilterMoviesCard(props) {
           </Select>
         </FormControl>
 
-        
-        
         <FormControl sx={{ margin: 1, minWidth: 220 }}>
           <InputLabel id="year-label">Release Year</InputLabel>
           <Select

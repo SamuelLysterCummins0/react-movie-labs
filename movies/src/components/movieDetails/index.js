@@ -72,7 +72,7 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
       </Paper>
       {movie.credits && (
         <>
-          {/* Cast Section */}
+          
           {movie.credits.cast.length > 0 && (
             <>
               <Typography variant="h5" component="h3" sx={{ mt: 2 }}>

@@ -10,7 +10,7 @@ import RemoveFromMustWatch from "../components/cardIcons/removeFromMustWatch";
 const MustWatchPage = () => {
   const {mustWatch: movieIds } = useContext(MoviesContext);
 
-  // Create an array of queries and run in parallel.
+  
   const mustWatchQueries = useQueries(
     movieIds.map((movieId) => {
       return {
@@ -19,7 +19,7 @@ const MustWatchPage = () => {
       };
     })
   );
-  // Check if any of the parallel queries is still loading.
+  
   const isLoading = mustWatchQueries.find((m) => m.isLoading === true);
 
   if (isLoading) {
